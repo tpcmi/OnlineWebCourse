@@ -80,8 +80,12 @@ WSGI_APPLICATION = 'OnlineWebCourse.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'OnlineWebCourse',
+        'USER': 'tp',
+        'PASSWORD': 'tp960606',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
     }
 }
 
@@ -117,7 +121,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)

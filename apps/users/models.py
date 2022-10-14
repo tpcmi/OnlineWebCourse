@@ -7,6 +7,10 @@ from django.contrib.auth.models import AbstractUser
 class BaseModel(models.Model):
     add_time = models.DateTimeField(verbose_name="添加时间", default=datetime.now)
 
+    class Meta:
+        # 抽象模型类，仅用作被继承，自身不会产生单独一个表
+        abstract = True
+
 
 GENDER_CHOICES = (
     ("male", "男"),
