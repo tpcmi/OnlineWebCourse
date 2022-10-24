@@ -32,16 +32,18 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
     'django.contrib.contenttypes',
+    'django.contrib.auth',
+    'django.contrib.admin',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'apps.users',
-    'apps.courses',
-    'apps.operations',
-    'apps.organizations'
+    'apps.users.apps.UsersConfig',
+    'apps.organizations.apps.OrganizationsConfig',
+    'apps.courses.apps.CoursesConfig',
+    'apps.operations.apps.OperationsConfig',
+    'xadmin',
+    'crispy_forms'
 ]
 
 MIDDLEWARE = [
@@ -113,7 +115,7 @@ AUTH_USER_MODEL = "users.UserProfile"
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-hans'
 
 TIME_ZONE = 'Asia/Shanghai'
 
@@ -128,6 +130,7 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
