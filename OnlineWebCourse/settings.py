@@ -16,7 +16,6 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
@@ -27,7 +26,6 @@ SECRET_KEY = 'django-insecure-n8l&n@x))%-#cja)%=p9@hq^0m-bmq-gwt%%f-&pv#o3e1w!)&
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -43,7 +41,8 @@ INSTALLED_APPS = [
     'apps.courses.apps.CoursesConfig',
     'apps.operations.apps.OperationsConfig',
     'xadmin',
-    'crispy_forms'
+    'crispy_forms',
+    'captcha'
 ]
 
 MIDDLEWARE = [
@@ -76,7 +75,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'OnlineWebCourse.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
@@ -90,7 +88,6 @@ DATABASES = {
         'PORT': '3306',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -125,11 +122,13 @@ USE_L10N = True
 
 USE_TZ = False
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    BASE_DIR / "static"
+]
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
@@ -137,3 +136,13 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.126.com'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = 'djangotest1@126.com'
+EMAIL_HOST_PASSWORD = 'TWNBGTEBCRVECVXM'
+
+# add for redis
+REDIS_HOST = '127.0.0.1'
+REDIS_PORT = 6379
