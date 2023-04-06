@@ -1,11 +1,12 @@
 from django.db import models
 
 from apps.users.models import BaseModel
+from apps.organizations.models import Teacher
 
 COURSE_DEGREE_CHOICES = (
-    (1, "初级"),
-    (2, "中级"),
-    (3, "高级")
+    ("1", "初级"),
+    ("2", "中级"),
+    ("3", "高级")
 )
 
 
@@ -23,10 +24,14 @@ class Course(BaseModel):
     teacher_words = models.CharField(verbose_name="教师嘱咐", max_length=300, default="")
     detail = models.TextField(verbose_name="课程详情")
     cover = models.ImageField(verbose_name="封面图", upload_to="courses", max_length=100)
+    teacher = models.ForeignKey(Teacher, verbose_name="教师", on_delete=models.CASCADE, default=1)
 
     class Meta:
         verbose_name = "课程信息"
         verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.name
 
 
 class Lesson(BaseModel):
@@ -37,6 +42,9 @@ class Lesson(BaseModel):
     class Meta:
         verbose_name = "课程章节"
         verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.name
 
 
 class Video(BaseModel):
@@ -49,6 +57,9 @@ class Video(BaseModel):
         verbose_name = "视频"
         verbose_name_plural = verbose_name
 
+    def __str__(self):
+        return self.name
+
 
 class CourseResource(BaseModel):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
@@ -58,3 +69,6 @@ class CourseResource(BaseModel):
     class Meta:
         verbose_name = "课程资源"
         verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.name
