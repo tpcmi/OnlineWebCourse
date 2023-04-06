@@ -13,5 +13,6 @@
   在A中查询B的值时可能造成的循环`import`（or 在局部作用域内import可以避免循环引用）
 - 分页使用了django-pure-pagination库，采用`XXX.object_list`读取数据
 
+### 10-7-8
 
 
