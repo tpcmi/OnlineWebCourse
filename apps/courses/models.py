@@ -1,7 +1,7 @@
 from django.db import models
 
 from apps.users.models import BaseModel
-from apps.organizations.models import Teacher
+from apps.organizations.models import Teacher, CourseOrg
 
 COURSE_DEGREE_CHOICES = (
     ("1", "初级"),
@@ -25,6 +25,8 @@ class Course(BaseModel):
     detail = models.TextField(verbose_name="课程详情")
     cover = models.ImageField(verbose_name="封面图", upload_to="courses", max_length=100)
     teacher = models.ForeignKey(Teacher, verbose_name="教师", on_delete=models.CASCADE, default=1)
+    course_org = models.ForeignKey(CourseOrg, verbose_name="所属机构", on_delete=models.CASCADE, blank=True, null=True)
+    is_classic = models.BooleanField(verbose_name="是否为经典课程", default=False)
 
     class Meta:
         verbose_name = "课程信息"

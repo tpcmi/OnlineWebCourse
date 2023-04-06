@@ -1,21 +1,28 @@
 from django.http import HttpResponse
+from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
+from django.views import View
+from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
 
-from apps.organizations.models import CourseOrg
+from apps.organizations.models import CourseOrg, City
 
 
-@csrf_exempt
-def test_upload(requests):
-    if requests.method == "GET":
-        return HttpResponse("<P1>OK</P1>")
-    name = requests.POST["name"]
-    desc = requests.POST["desc"]
-    tag = requests.POST["tag"]
-    category = requests.POST["category"]
-    click_nums = requests.POST["click_nums"]
-    fav_nums = requests.POST["fav_nums"]
-    logo = requests.FILES["logo"]
-    CourseOrg.objects.create(name=name, desc=desc, tag=tag, category=category, click_nums=click_nums, fav_nums=fav_nums,
-                             logo=logo)
-    # CourseOrg.objects.create(requests.POST)
-    return HttpResponse("NICE")
+class OrgView(View):
+    def get(self, request):
+        all_orgs = CourseOrg.objects.all()
+        org_nums = CourseOrg.objects.count()
+        all_citys = City.objects.all()
+
+        try:
+            page = request.GET.get('page', 1)
+        except PageNotAnInteger:
+            page = 1
+
+        p = Paginator(all_orgs, per_page=1, request=request)
+        orgs = p.page(page)
+
+        return render(request, "org-list.html", {
+            "all_orgs": orgs,
+            "org_nums": org_nums,
+            "all_citys": all_citys
+        })

@@ -22,6 +22,7 @@ from django.views.generic import TemplateView
 import xadmin
 
 from apps.users.views import LoginView, LogoutView, RegisterView, SendSmsView, DynamicLoginView
+from apps.organizations.views import OrgView
 
 import apps.organizations.views
 
@@ -34,4 +35,5 @@ urlpatterns = [
                   path('send_sms/', csrf_exempt(SendSmsView.as_view()), name='send_sms'),
                   path('xadmin/', xadmin.site.urls),
                   path('captcha/', include('captcha.urls')),
+                  path('org_list/', OrgView.as_view(), name="org_list"),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
