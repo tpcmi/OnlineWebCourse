@@ -35,5 +35,5 @@ urlpatterns = [
                   path('send_sms/', csrf_exempt(SendSmsView.as_view()), name='send_sms'),
                   path('xadmin/', xadmin.site.urls),
                   path('captcha/', include('captcha.urls')),
-                  path('org_list/', OrgView.as_view(), name="org_list"),
+                  path('org/', include(("apps.organizations.urls", "organizations"), namespace="org")),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

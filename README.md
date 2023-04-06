@@ -13,6 +13,9 @@
   在A中查询B的值时可能造成的循环`import`（or 在局部作用域内import可以避免循环引用）
 - 分页使用了django-pure-pagination库，采用`XXX.object_list`读取数据
 
-### 10-7-8
+### 10-9-10
+
+- 当不同app中的路由具有相同的标识`name`时，由于name没有作用域，当找到第一个时，就会直接返回，导致出现不符合预期的情况，
+  采用命名空间`namespace`这个参数可以进行区分，使用方法是`"namespace:name"`
 
 
