@@ -1,10 +1,11 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.views import View
 from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
 
 from apps.organizations.models import CourseOrg, City
+from apps.organizations.forms import UserConsultModelForm
 
 
 class OrgView(View):
@@ -45,3 +46,23 @@ class OrgView(View):
             "sort_org": sort_org,
             "hot_orgs": hot_orgs
         })
+
+
+class UserConsultView(View):
+    def post(self, request):
+        user_consult_form = UserConsultModelForm(request.POST)
+        if user_consult_form.is_valid():
+            user_consult_form.save(commit=True)
+            return JsonResponse({
+                "status": "success"
+            })
+        else:
+            return JsonResponse({
+                "status": "fail",
+                "msg": "添加出错"
+            })
+
+
+class OrgHomeView(View):
+    def get(self, request, org_id):
+        return render(request, "org-detail-homepage.html")

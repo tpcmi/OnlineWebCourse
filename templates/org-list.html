@@ -149,6 +149,7 @@
                     </div>
                     <p class="error company-tips" id="jsCompanyTips"></p>
                     <input class="btn" type="text" id="jsStayBtn" value="立即咨询 >"/>
+                    {% csrf_token %}
                 </form>
             </div>
             <div class="right companyrank layout">
@@ -176,7 +177,7 @@
                     $.ajax({
                         cache: false,
                         type: "POST",
-                        url: "/org/add_ask/",
+                        url: "{% url "org:add_ask"%}",
                         data: $('#jsStayForm').serialize(),
                         async: true,
                         success: function (data) {
